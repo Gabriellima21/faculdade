@@ -22,6 +22,7 @@ public class CursoService {
 	protected static final String MENSAGEM_NOME_CURSO_NAO_PREENCHIDO = "O nomde do curso deve ser informado.";
 	protected static final String MENSAGEM_PERIODO_CURSO_NAO_PREENCHIDO = "O periodo do curso deve ser informado";
 	protected static final String MENSAGEM_ID_CURSO_NULL = "O id do curso deve ser informado";
+	protected static final String MENSAGEM_VALOR_NULL = "O valor da mensalidade do curso deve ser informado";
 
 	@Autowired
 	CursoRepository cursoRepository;
@@ -33,6 +34,8 @@ public class CursoService {
 			throw new CursoException(MENSAGEM_NOME_CURSO_NAO_PREENCHIDO);
 		}else if(curso.getPeriodo() == null || curso.getPeriodo().isBlank()) {
 			throw new CursoException(MENSAGEM_PERIODO_CURSO_NAO_PREENCHIDO);
+		}else if (curso.getValor() == null) {
+			throw new CursoException(MENSAGEM_VALOR_NULL);
 		}
 		return cursoRepository.save(curso);
 	}
@@ -46,6 +49,8 @@ public class CursoService {
 			throw new CursoException(MENSAGEM_PERIODO_CURSO_NAO_PREENCHIDO);
 		}else if (curso.getId() == null) {
 			throw new CursoException(MENSAGEM_CURSO_ID_NAO_PREENCHIDO);
+		}else if (curso.getValor() == null) {
+			throw new CursoException(MENSAGEM_VALOR_NULL);
 		}
 		return cursoRepository.save(curso);
 	}
