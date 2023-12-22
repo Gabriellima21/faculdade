@@ -35,6 +35,8 @@ public class Aluno {
 	private StatusEnum status;
 	@Enumerated(EnumType.STRING)
 	private StatusEnum sexo;
+	@Column
+	private Integer codigo;
 	
 	public LocalDate getData() {
 		return data;
