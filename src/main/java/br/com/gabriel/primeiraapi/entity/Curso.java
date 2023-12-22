@@ -1,6 +1,6 @@
 package br.com.gabriel.primeiraapi.entity;
 
-import javax.persistence.Column; 
+import javax.persistence.Column;  
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,9 +14,19 @@ public class Curso {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_curso")
 	private Integer id;
+	@Column
 	private String nome;
+	@Column
 	private String periodo;
+	@Column
+	private Double valor;
 	
+	public Double getValor() {
+		return valor;
+	}
+	public void setValor(Double valor) {
+		this.valor = valor;
+	}
 	public Integer getId() {
 		return id;
 	}
