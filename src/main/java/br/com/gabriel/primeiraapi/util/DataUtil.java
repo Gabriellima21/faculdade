@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import org.springframework.stereotype.Component;
 
 @Component
-public class Data {
+public class DataUtil {
 	
 	 public static LocalDate dataAtual() {
 		  	LocalDate dataAtual = LocalDate.now();
