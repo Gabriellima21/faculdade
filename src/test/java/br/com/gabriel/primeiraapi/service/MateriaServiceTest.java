@@ -25,7 +25,7 @@ import br.com.gabriel.primeiraapi.exception.AlunoException;
 import br.com.gabriel.primeiraapi.exception.MateriaException;
 import br.com.gabriel.primeiraapi.exception.ProfessorException;
 import br.com.gabriel.primeiraapi.repository.MateriaRepository;
-import br.com.gabriel.primeiraapi.util.Data;
+import br.com.gabriel.primeiraapi.util.DataUtil;
 
 @ExtendWith(MockitoExtension.class)
 public class MateriaServiceTest {

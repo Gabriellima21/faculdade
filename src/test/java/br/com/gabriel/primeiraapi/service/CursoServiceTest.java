@@ -1,12 +1,11 @@
 package br.com.gabriel.primeiraapi.service;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals; 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
@@ -14,10 +13,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-
 import br.com.gabriel.primeiraapi.entity.Curso;
 import br.com.gabriel.primeiraapi.exception.CursoException;
-import br.com.gabriel.primeiraapi.exception.MateriaException;
 import br.com.gabriel.primeiraapi.exception.ProfessorException;
 import br.com.gabriel.primeiraapi.repository.CursoRepository;
 
@@ -42,6 +39,16 @@ public class CursoServiceTest {
 		Curso curso = new Curso();
 		curso.setPeriodo("Noturno");
 		curso.setNome(null);
+		curso.setValor(500.00);
+		assertThrows(CursoException.class, 
+				() -> cursoService.criar(curso));
+	}
+	@Test
+	public void testCursoComValorNull() {
+		Curso curso = new Curso();
+		curso.setPeriodo("Noturno");
+		curso.setNome("ADS");
+		curso.setValor(null);
 		assertThrows(CursoException.class, 
 				() -> cursoService.criar(curso));
 	}
@@ -50,6 +57,7 @@ public class CursoServiceTest {
 		Curso curso = new Curso();
 		curso.setNome(" ");
 		curso.setPeriodo("Noturno");
+		curso.setValor(500.00);
 		assertThrows(CursoException.class, 
 				() -> cursoService.criar(curso));
 	}
@@ -58,6 +66,7 @@ public class CursoServiceTest {
 		Curso curso = new Curso();
 		curso.setNome("ADS");
 		curso.setPeriodo(null);
+		curso.setValor(500.00);
 		assertThrows(CursoException.class, 
 				() -> cursoService.criar(curso));
 	}
@@ -66,6 +75,7 @@ public class CursoServiceTest {
 		Curso curso = new Curso();
 		curso.setNome("ads");
 		curso.setPeriodo(" ");
+		curso.setValor(500.00);
 		assertThrows(CursoException.class, 
 				() -> cursoService.criar(curso));
 	}
@@ -74,11 +84,11 @@ public class CursoServiceTest {
 		Curso curso = new Curso ();
 		curso.setNome("ADS");
 		curso.setPeriodo("Noturno");
-		
+		curso.setValor(500.00);
 		Curso cursoEsperado = new Curso ();
 		cursoEsperado.setNome("ADS");
 		cursoEsperado.setPeriodo("Vespertino");
-		
+		cursoEsperado.setValor(500.00);
 		Mockito.when(cursoRepository.save(curso)).thenReturn(cursoEsperado);
 		
 		Curso cursoRetornado = cursoService.criar(curso);
@@ -102,12 +112,13 @@ public class CursoServiceTest {
 	
 	@Test
 	public void testAtualizarCursoNomeNull() {
-		Curso cursoEsperada = new Curso();
-		cursoEsperada.setId(1);
-		cursoEsperada.setNome(null);
-		cursoEsperada.setPeriodo("Noturno");
+		Curso cursoEsperado = new Curso();
+		cursoEsperado.setId(1);
+		cursoEsperado.setNome(null);
+		cursoEsperado.setPeriodo("Noturno");
+		cursoEsperado.setValor(500.00);
 		assertThrows(CursoException.class,
-				() -> cursoService.atualizar(cursoEsperada));
+				() -> cursoService.atualizar(cursoEsperado));
 	}
 	
 	@Test
@@ -116,6 +127,7 @@ public class CursoServiceTest {
 		cursoEsperado.setId(1);
 		cursoEsperado.setNome(" ");
 		cursoEsperado.setPeriodo("Noturno");
+		cursoEsperado.setValor(500.00);
 		assertThrows(CursoException.class,
 				() -> cursoService.atualizar(cursoEsperado));
 	}
@@ -126,6 +138,7 @@ public class CursoServiceTest {
 		cursoEsperado.setId(1);
 		cursoEsperado.setNome("Noturno");
 		cursoEsperado.setPeriodo(null);
+		cursoEsperado.setValor(500.00);
 		assertThrows(CursoException.class,
 				() -> cursoService.atualizar(cursoEsperado));
 	}
@@ -136,6 +149,7 @@ public class CursoServiceTest {
 		cursoEsperado.setId(1);
 		cursoEsperado.setNome("ads");
 		cursoEsperado.setPeriodo(" ");
+		cursoEsperado.setValor(500.00);
 		assertThrows(CursoException.class,
 				() -> cursoService.atualizar(cursoEsperado));
 	}
@@ -146,6 +160,17 @@ public class CursoServiceTest {
 		cursoEsperado.setId(null);
 		cursoEsperado.setNome("ads");
 		cursoEsperado.setPeriodo("Noturno");
+		cursoEsperado.setValor(500.00);
+		assertThrows(CursoException.class,
+				()-> cursoService.atualizar(cursoEsperado));
+	}
+	@Test
+	public void testAtualizarComValorIdNull() {
+		Curso cursoEsperado = new Curso();
+		cursoEsperado.setId(null);
+		cursoEsperado.setNome("ads");
+		cursoEsperado.setPeriodo("Noturno");
+		cursoEsperado.setValor(null);
 		assertThrows(CursoException.class,
 				()-> cursoService.atualizar(cursoEsperado));
 	}
@@ -156,12 +181,12 @@ public class CursoServiceTest {
 		curso.setId(1);
 		curso.setNome("ads");
 		curso.setPeriodo("Noturno");
-		
+		curso.setValor(500.00);
 		Curso cursoEsperado = new Curso ();
 		cursoEsperado.setId(1);
 		cursoEsperado.setNome("ADS");
 		cursoEsperado.setPeriodo("Noturno");
-		
+		cursoEsperado.setValor(500.00);
 		Mockito.when(cursoRepository.save(curso)).thenReturn(cursoEsperado);
 		
 		Curso cursoRetornado = new Curso();
